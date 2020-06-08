@@ -31,5 +31,5 @@ export function render() {
 	bunny1.y = app.screen.height / 2;
 
 	app.stage.addChild(bunny1);
-	app.ticker.add((delta) => (bunny1.rotation += 0.01 * delta));
+	gsap.ticker.add(() => (bunny1.rotation += 0.01));
 }
