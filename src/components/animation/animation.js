@@ -26,9 +26,23 @@ export function render() {
 
 	const bunny1 = new PIXI.Sprite(texture);
 	bunny1.interactive = true;
+	bunny1.buttonMode = true;
 	bunny1.anchor.set(0.5);
 	bunny1.x = getRandomInt(100, app.screen.width - 100);
 	bunny1.y = getRandomInt(100, app.screen.height - 100);
+
+	let isLarge = false;
+	function onClick() {
+		if (isLarge) {
+			bunny1.scale.x /= 5;
+			bunny1.scale.y /= 5;
+		} else {
+			bunny1.scale.x *= 5;
+			bunny1.scale.y *= 5;
+		}
+		isLarge = !isLarge;
+	}
+	bunny1.on('pointerdown', onClick);
 
 	app.stage.addChild(bunny1);
 	app.ticker.start();
