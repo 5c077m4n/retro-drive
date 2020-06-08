@@ -25,7 +25,8 @@ export function render() {
 	const renderer = init();
 	const stage = new PIXI.Container();
 
-	const bunnies = Array.from({ length: 30 }, () => PIXI.Texture.from(bunnyPng))
+	const bunnies = Array(20)
+		.fill(PIXI.Texture.from(bunnyPng))
 		.map((texture) => PIXI.Sprite.from(texture))
 		.map((bunny) => {
 			bunny.interactive = true;
