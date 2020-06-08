@@ -1,11 +1,11 @@
-import { Application, Sprite, Texture } from 'pixi.js';
+import * as PIXI from 'pixi.js';
 import gsap from 'gsap';
 
 import { getRandomInt } from '../../lib';
 import bunnyPng from '@assets/img/bunny.png';
 
 function init() {
-	const app = new Application({
+	const app = new PIXI.Application({
 		height: window.innerHeight,
 		width: window.innerWidth,
 		antialias: true,
@@ -22,9 +22,9 @@ function init() {
 export function render() {
 	const app = init();
 
-	const texture = Texture.from(bunnyPng);
+	const texture = PIXI.Texture.from(bunnyPng);
 
-	const bunny1 = new Sprite(texture);
+	const bunny1 = new PIXI.Sprite(texture);
 	bunny1.interactive = true;
 	bunny1.anchor.set(0.5);
 	bunny1.x = getRandomInt(100, app.screen.width - 100);
