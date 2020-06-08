@@ -27,8 +27,8 @@ export function render() {
 	const bunny1 = new Sprite(texture);
 	bunny1.interactive = true;
 	bunny1.anchor.set(0.5);
-	bunny1.x = app.screen.width / 2;
-	bunny1.y = app.screen.height / 2;
+	bunny1.x = getRandomInt(100, app.screen.width - 100);
+	bunny1.y = getRandomInt(100, app.screen.height - 100);
 
 	app.stage.addChild(bunny1);
 	app.ticker.start();
