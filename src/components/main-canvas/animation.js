@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import gsap from 'gsap';
 
 import bunnyPng from '@assets/img/bunny.png';
 
@@ -52,10 +53,8 @@ export function render() {
 		});
 	bunnies.forEach((bunny) => stage.addChild(bunny));
 
-	const ticker = new PIXI.Ticker();
-	ticker.add(() => {
+	gsap.ticker.add(() => {
 		bunnies.forEach((bunny) => (bunny.rotation += 0.05));
 		renderer.render(stage);
 	});
-	ticker.start();
 }
