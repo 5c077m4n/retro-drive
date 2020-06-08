@@ -24,31 +24,37 @@ export function render() {
 	const renderer = init();
 	const stage = new PIXI.Container();
 
-	const texture = PIXI.Texture.from(bunnyPng);
-	const bunny1 = PIXI.Sprite.from(texture);
-	bunny1.interactive = true;
-	bunny1.buttonMode = true;
-	bunny1.anchor.set(0.5);
+	const bunnies = Array.from({ length: 30 }, () => PIXI.Texture.from(bunnyPng))
+		.map((texture) => PIXI.Sprite.from(texture))
+		.map((bunny) => {
+			bunny.interactive = true;
+			bunny.buttonMode = true;
+			bunny.anchor.set(0.5);
+			bunny.x = Math.random() * renderer.screen.width;
+			bunny.y = Math.random() * renderer.screen.height;
 
-	let isLarge = false;
-	function onClick() {
-		if (isLarge) {
-			bunny1.scale.x /= 5;
-			bunny1.scale.y /= 5;
-		} else {
-			bunny1.scale.x *= 5;
-			bunny1.scale.y *= 5;
-		}
-		isLarge = !isLarge;
-	}
-	bunny1.on('pointerdown', onClick);
-	stage.addChild(bunny1);
+			return bunny;
+		})
+		.map((bunny) => {
+			let isLarge = false;
+			bunny.on('pointerdown', () => {
+				if (isLarge) {
+					bunny.scale.x /= 5;
+					bunny.scale.y /= 5;
+				} else {
+					bunny.scale.x *= 5;
+					bunny.scale.y *= 5;
+				}
+				isLarge = !isLarge;
+			});
+
+			return bunny;
+		});
+	bunnies.forEach((bunny) => stage.addChild(bunny));
 
 	const ticker = new PIXI.Ticker();
 	ticker.add(() => {
-		bunny1.x = renderer.screen.width / 2;
-		bunny1.y = renderer.screen.height / 2;
-		bunny1.rotation += 0.1;
+		bunnies.forEach((bunny) => (bunny.rotation += 0.05));
 		renderer.render(stage);
 	});
 	ticker.start();
