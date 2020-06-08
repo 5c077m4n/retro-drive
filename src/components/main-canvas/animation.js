@@ -53,8 +53,8 @@ export function render() {
 		});
 	bunnies.forEach((bunny) => stage.addChild(bunny));
 
-	gsap.ticker.add(() => {
-		bunnies.forEach((bunny) => (bunny.rotation += 0.05));
+	gsap.ticker.add((delta) => {
+		bunnies.forEach((bunny) => (bunny.rotation += Math.sin(delta) / 7));
 		renderer.render(stage);
 	});
 }
