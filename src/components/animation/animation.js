@@ -1,5 +1,7 @@
 import { Application, Sprite, Texture } from 'pixi.js';
+import gsap from 'gsap';
 
+import { getRandomInt } from '../../lib';
 import bunnyPng from '@assets/img/bunny.png';
 
 function init() {
@@ -12,6 +14,7 @@ function init() {
 	});
 	app.renderer.autoResize = true;
 	document.body.appendChild(app.view);
+	app.ticker.stop();
 
 	return app;
 }
@@ -21,12 +24,12 @@ export function render() {
 
 	const texture = Texture.from(bunnyPng);
 
-	const bunny = new Sprite(texture);
-	bunny.interactive = true;
-	bunny.anchor.set(0.5);
-	bunny.x = app.screen.width / 2;
-	bunny.y = app.screen.height / 2;
+	const bunny1 = new Sprite(texture);
+	bunny1.interactive = true;
+	bunny1.anchor.set(0.5);
+	bunny1.x = app.screen.width / 2;
+	bunny1.y = app.screen.height / 2;
 
-	app.stage.addChild(bunny);
-	app.ticker.add((delta) => (bunny.rotation += 0.01 * delta));
+	app.stage.addChild(bunny1);
+	app.ticker.add((delta) => (bunny1.rotation += 0.01 * delta));
 }

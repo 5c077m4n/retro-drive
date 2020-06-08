@@ -1,1 +1,1 @@
-export { render } from './animation';
+export { getRandomInt } from './random-int';
