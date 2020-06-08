@@ -24,7 +24,7 @@ export function render() {
 
 	const texture = PIXI.Texture.from(bunnyPng);
 
-	const bunny1 = new PIXI.Sprite(texture);
+	const bunny1 = PIXI.Sprite.from(texture);
 	bunny1.interactive = true;
 	bunny1.buttonMode = true;
 	bunny1.anchor.set(0.5);
@@ -45,6 +45,7 @@ export function render() {
 	bunny1.on('pointerdown', onClick);
 
 	app.stage.addChild(bunny1);
+
 	app.ticker.start();
 	gsap.to(bunny1, {
 		rotation: 2 * Math.PI,
