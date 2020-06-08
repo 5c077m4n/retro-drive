@@ -1,7 +1,5 @@
 import * as PIXI from 'pixi.js';
-// import gsap from 'gsap';
 
-import { getRandomInt } from '../../lib';
 import bunnyPng from '@assets/img/bunny.png';
 
 function init() {
@@ -13,6 +11,9 @@ function init() {
 		autoDensity: true,
 		antialias: true,
 		backgroundColor: 0x1099bb,
+	});
+	window.addEventListener('resize', () => {
+		renderer.resize(window.innerWidth, window.innerHeight);
 	});
 	document.body.appendChild(renderer.view);
 
@@ -28,8 +29,6 @@ export function render() {
 	bunny1.interactive = true;
 	bunny1.buttonMode = true;
 	bunny1.anchor.set(0.5);
-	bunny1.x = getRandomInt(100, renderer.width - 100);
-	bunny1.y = getRandomInt(100, renderer.height - 100);
 
 	let isLarge = false;
 	function onClick() {
@@ -47,6 +46,8 @@ export function render() {
 
 	const ticker = new PIXI.Ticker();
 	ticker.add(() => {
+		bunny1.x = renderer.screen.width / 2;
+		bunny1.y = renderer.screen.height / 2;
 		bunny1.rotation += 0.1;
 		renderer.render(stage);
 	});
