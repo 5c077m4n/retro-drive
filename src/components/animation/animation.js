@@ -13,8 +13,8 @@ function init() {
 		backgroundColor: 0x1099bb,
 	});
 	app.renderer.autoResize = true;
-	document.body.appendChild(app.view);
 	app.ticker.stop();
+	document.body.appendChild(app.view);
 
 	return app;
 }
@@ -31,5 +31,11 @@ export function render() {
 	bunny1.y = app.screen.height / 2;
 
 	app.stage.addChild(bunny1);
-	gsap.ticker.add(() => (bunny1.rotation += 0.01));
+	app.ticker.start();
+	gsap.to(bunny1, {
+		rotation: 2 * Math.PI,
+		repeat: -1,
+		yoyo: true,
+		duration: 2.0,
+	});
 }
