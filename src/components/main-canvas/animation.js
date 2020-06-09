@@ -40,11 +40,9 @@ export function render() {
 		.map((bunny) => {
 			let isLarge = false;
 			bunny.on('pointerdown', () => {
-				if (isLarge) {
-					bunny.scale.set(1);
-				} else {
-					bunny.scale.set(5);
-				}
+				if (isLarge) bunny.scale.set(1);
+				else bunny.scale.set(5);
+
 				isLarge = !isLarge;
 			});
 
