@@ -1,4 +1,4 @@
-import { render } from './components/main-canvas';
+import { render } from './lib';
 
 import './index.scss';
 

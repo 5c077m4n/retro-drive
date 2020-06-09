@@ -1,32 +1,16 @@
 import * as PIXI from 'pixi.js';
 import gsap from 'gsap';
 
-import bunnyPng from '@assets/img/bunny.png';
+import { createRenderer } from './create-renderer';
+import { imageLoader } from './image-loader';
 
-function init() {
-	// PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
-	const renderer = new PIXI.Renderer({
-		height: window.innerHeight,
-		width: window.innerWidth,
-		resolution: window.devicePixelRatio || 1,
-		autoDensity: true,
-		antialias: true,
-		backgroundColor: 0x1099bb,
-	});
-	window.addEventListener('resize', () => {
-		renderer.resize(window.innerWidth, window.innerHeight);
-	});
-	document.body.appendChild(renderer.view);
-
-	return renderer;
-}
-
-export function render() {
-	const renderer = init();
+export async function render() {
+	const resources = await imageLoader();
+	const renderer = createRenderer();
 	const stage = new PIXI.Container();
 
 	const bunnies = Array(20)
-		.fill(PIXI.Texture.from(bunnyPng))
+		.fill(resources.bunny.texture)
 		.map((texture) => PIXI.Sprite.from(texture))
 		.map((bunny) => {
 			bunny.interactive = true;
