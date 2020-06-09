@@ -3,7 +3,7 @@ import { Loader } from 'pixi.js';
 import bunnyPng from '@assets/img/bunny.png';
 
 let isFirstRun = true;
-export async function imageLoader() {
+export async function getGlobalResources() {
 	return new Promise((resolve, reject) => {
 		const loader = Loader.shared;
 

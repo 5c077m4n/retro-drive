@@ -2,10 +2,10 @@ import * as PIXI from 'pixi.js';
 import gsap from 'gsap';
 
 import { createRenderer } from './create-renderer';
-import { imageLoader } from './image-loader';
+import { getGlobalResources } from './image-loader';
 
 export async function render() {
-	const resources = await imageLoader();
+	const resources = await getGlobalResources();
 	const renderer = createRenderer();
 	const stage = new PIXI.Container();
 

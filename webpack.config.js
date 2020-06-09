@@ -30,7 +30,7 @@ module.exports = function config({ prod = false } = {}) {
 		module: {
 			rules: [
 				{
-					test: /\.(png|svg|jpg|gif)$/,
+					test: /\.(png|svg|jpe?g|gif)$/,
 					use: ['file-loader'],
 				},
 				{
@@ -48,7 +48,6 @@ module.exports = function config({ prod = false } = {}) {
 			contentBase: path.join(__dirname, 'dist'),
 			compress: true,
 			port: 3000,
-			writeToDisk: true,
 		},
 		output: {
 			filename: '[name].[contenthash].js',
