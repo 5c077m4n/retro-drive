@@ -41,11 +41,9 @@ export function render() {
 			let isLarge = false;
 			bunny.on('pointerdown', () => {
 				if (isLarge) {
-					bunny.scale.x /= 5;
-					bunny.scale.y /= 5;
+					bunny.scale.set(1);
 				} else {
-					bunny.scale.x *= 5;
-					bunny.scale.y *= 5;
+					bunny.scale.set(5);
 				}
 				isLarge = !isLarge;
 			});
