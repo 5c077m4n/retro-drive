@@ -20,6 +20,10 @@ export async function render(): Promise<void> {
 			return bunny;
 		})
 		.map((bunny) => {
+			ticker.add((time) => (bunny.rotation += Math.sin(time) / 7));
+			return bunny;
+		})
+		.map((bunny) => {
 			let isLarge = false;
 			bunny.on('pointerdown', () => {
 				if (isLarge) bunny.scale.set(1);
@@ -32,8 +36,5 @@ export async function render(): Promise<void> {
 		});
 	stage.addChild(...bunnies);
 
-	ticker.add((time: number) => {
-		bunnies.forEach((bunny) => (bunny.rotation += Math.sin(time) / 7));
-		renderer.render(stage);
-	});
+	ticker.add(() => renderer.render(stage));
 }
