@@ -20,7 +20,7 @@ export async function render(): Promise<void> {
 			return bunny;
 		})
 		.map((bunny) => {
-			ticker.add((time) => (bunny.rotation += Math.sin(time) / 7));
+			ticker.add(() => (bunny.rotation += 0.1));
 			return bunny;
 		})
 		.map((bunny) => {
