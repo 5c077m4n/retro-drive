@@ -1,4 +1,4 @@
-import { render } from './lib';
+import { render } from './test/index';
 
 import './index.scss';
 

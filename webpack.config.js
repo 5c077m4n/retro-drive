@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const { DefinePlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -23,12 +24,17 @@ module.exports = function config({ prod = false } = {}) {
 	}
 
 	return {
-		entry: { index: './src/index.js' },
+		entry: { index: './src/index.ts' },
 		mode: prod ? 'production' : 'development',
 		devtool: prod ? 'source-map' : 'eval-cheap-source-map',
 		plugins,
 		module: {
 			rules: [
+				{
+					test: /\.tsx?$/,
+					use: 'ts-loader',
+					exclude: /node_modules/,
+				},
 				{
 					test: /\.(png|svg|jpe?g|gif)$/,
 					use: ['file-loader'],
@@ -40,6 +46,7 @@ module.exports = function config({ prod = false } = {}) {
 			],
 		},
 		resolve: {
+			extensions: ['.ts', '.js'],
 			alias: {
 				'@assets': path.resolve(__dirname, 'assets'),
 			},

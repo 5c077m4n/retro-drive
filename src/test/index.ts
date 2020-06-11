@@ -1,10 +1,8 @@
 import * as PIXI from 'pixi.js';
-import gsap from 'gsap';
 
-import { createRenderer } from './create-renderer';
-import { getGlobalResources } from './image-loader';
+import { ticker, createRenderer, getGlobalResources } from '../shared/index';
 
-export async function render() {
+export async function render(): Promise<void> {
 	const resources = await getGlobalResources();
 	const renderer = createRenderer();
 	const stage = new PIXI.Container();
@@ -32,9 +30,9 @@ export async function render() {
 
 			return bunny;
 		});
-	bunnies.forEach((bunny) => stage.addChild(bunny));
+	stage.addChild(...bunnies);
 
-	gsap.ticker.add((time) => {
+	ticker.add((time: number) => {
 		bunnies.forEach((bunny) => (bunny.rotation += Math.sin(time) / 7));
 		renderer.render(stage);
 	});

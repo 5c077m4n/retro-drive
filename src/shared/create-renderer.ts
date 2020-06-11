@@ -1,6 +1,6 @@
 import { Renderer } from 'pixi.js';
 
-export function createRenderer() {
+export function createRenderer(): Renderer {
 	// PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 	const renderer = new Renderer({
 		height: window.innerHeight,
