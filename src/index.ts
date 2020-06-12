@@ -1,4 +1,4 @@
-import { render } from './test/index';
+import { render } from './spinning-bunnies/index';
 
 import './index.scss';
 

@@ -1,15 +1,18 @@
-import * as PIXI from 'pixi.js';
+import { Container, Sprite } from 'pixi.js';
 
 import { ticker, createRenderer, getGlobalResources } from '../shared/index';
+import bunnyPng from '@assets/test/images/bunny.png';
 
 export async function render(): Promise<void> {
-	const resources = await getGlobalResources();
+	const resources = await getGlobalResources([
+		{ name: 'bunny', content: bunnyPng },
+	]);
 	const renderer = createRenderer();
-	const stage = new PIXI.Container();
+	const stage = new Container();
 
-	const bunnies = Array(20)
+	const bunnies = Array(200)
 		.fill(resources.bunny.texture)
-		.map((texture) => PIXI.Sprite.from(texture))
+		.map((texture) => Sprite.from(texture))
 		.map((bunny) => {
 			bunny.interactive = true;
 			bunny.buttonMode = true;
@@ -25,9 +28,9 @@ export async function render(): Promise<void> {
 		})
 		.map((bunny) => {
 			let isLarge = false;
-			bunny.on('pointerdown', () => {
-				if (isLarge) bunny.scale.set(1);
-				else bunny.scale.set(5);
+			bunny.on('pointerdown', ({ target }: { target: Sprite }) => {
+				if (isLarge) target.scale.set(1);
+				else target.scale.set(5);
 
 				isLarge = !isLarge;
 			});
